@@ -156,7 +156,7 @@ const Contact = () => {
           </h3>
 
           <p>
-            Email: support@shopkart.com
+            Email: jyotirana7388@gmail.com
           </p>
 
           <p>
