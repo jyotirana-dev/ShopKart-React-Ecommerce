@@ -73,7 +73,7 @@ const Footer = () => {
 
 
           <p>
-            Email: support@shopkart.com
+            Email: jyotirana7388@gmail.com
           </p>
 
 
