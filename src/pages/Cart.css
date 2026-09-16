@@ -1,0 +1,241 @@
+.cart-heading {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 32px;
+}
+
+
+.empty-cart {
+  text-align: center;
+  margin-top: 50px;
+  color: gray;
+}
+
+
+/* Cart Area */
+
+.cart-page {
+  width: 90%;
+  margin: auto;
+}
+
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* Single Product */
+
+.cart-card {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 20px;
+
+  background: white;
+
+  border: 1px solid #ddd;
+
+  border-radius: 15px;
+
+  transition: 0.3s;
+
+}
+
+
+.cart-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+}
+
+
+/* Image */
+
+.cart-card img {
+
+  width: 130px;
+
+  height: 130px;
+
+  object-fit: contain;
+
+}
+
+
+
+/* Product title */
+
+.cart-card h3 {
+
+  width: 250px;
+
+}
+
+
+/* Price */
+
+.cart-card h4 {
+
+  color: green;
+
+}
+
+
+
+
+/* Quantity */
+
+.quantity-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+}
+
+
+.quantity-box button {
+
+  width: 35px;
+
+  height: 35px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #111;
+
+  color: white;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+}
+
+
+.quantity-box button:hover {
+
+  background: orange;
+
+}
+
+
+.quantity-box span {
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+}
+
+
+
+/* Remove */
+
+.remove-btn {
+
+  padding: 10px 20px;
+
+  border: none;
+
+  background: red;
+
+  color: white;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+}
+
+
+.remove-btn:hover {
+
+  opacity: 0.8;
+
+}
+
+
+
+/* Summary */
+
+.cart-summary {
+
+  text-align: right;
+
+  margin-top: 40px;
+
+}
+
+
+
+.checkout-btn {
+
+  padding: 14px 30px;
+
+  border: none;
+
+  background: #2874f0;
+
+  color: white;
+
+  border-radius: 25px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+}
+
+
+.checkout-btn:hover {
+
+  background: orange;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:700px){
+
+  .cart-card {
+
+    flex-direction: column;
+
+    text-align: center;
+
+  }
+
+
+  .cart-card h3 {
+
+    width: auto;
+
+  }
+
+
+  .cart-summary {
+
+    text-align: center;
+
+  }
+
+}
