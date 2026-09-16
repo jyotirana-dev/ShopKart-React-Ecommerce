@@ -7,255 +7,338 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
 
-const [startIndex,setStartIndex] = useState(0);
-const [products,setProducts] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+
+  const [products, setProducts] = useState([]);
 
 
+  useEffect(() => {
 
-useEffect(()=>{
+    fetch("https://dummyjson.com/products?limit=30")
 
-fetch("https://dummyjson.com/products?limit=30")
+      .then(res => res.json())
 
-.then(res=>res.json())
+      .then(data => {
 
-.then(data=>{
+        setProducts(data.products);
 
-setProducts(data.products);
+      });
 
-})
-
-
-},[]);
+  }, []);
 
 
-const nextProducts = ()=>{
+  /* ================= DESKTOP SLIDER ================= */
+
+const nextProducts = () => {
 
   if(startIndex < products.length - 4){
 
     setStartIndex(startIndex + 1);
 
   }
+  else{
+
+    setStartIndex(0);
+
+  }
 
 };
 
 
 
-const prevProducts = ()=>{
+const prevProducts = () => {
 
   if(startIndex > 0){
 
     setStartIndex(startIndex - 1);
 
   }
+  else{
+
+    setStartIndex(products.length - 4);
+
+  }
 
 };
 
-const categories = [
+  /* ================= MOBILE SLIDER ================= */
 
-{
-name:"Fashion",
-image:"https://images.unsplash.com/photo-1445205170230-053b83016050"
-},
+const nextMobileProduct = () => {
 
-{
-name:"Electronics",
-image:"https://images.unsplash.com/photo-1498049794561-7780e7231661"
-},
+  if (startIndex < products.length - 1) {
 
-{
-name:"Beauty",
-image:"https://images.unsplash.com/photo-1596462502278-27bfdc403348"
-},
+    setStartIndex(startIndex + 1);
 
-{
-name:"Home",
-image:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6"
-}
+  }
+  else {
 
-];
+    setStartIndex(0);
 
+  }
 
+};
 
-return (
 
-<div className="home">
 
+const prevMobileProduct = () => {
 
-<Navbar />
+  if (startIndex > 0) {
 
+    setStartIndex(startIndex - 1);
 
+  }
+  else {
 
-<section className="hero">
+    setStartIndex(products.length - 1);
 
+  }
 
-<div className="hero-text">
+};
 
 
-<h1>
-Welcome to ShopKart
-</h1>
+  const categories = [
 
+    {
+      name: "Fashion",
+      image: "https://images.unsplash.com/photo-1445205170230-053b83016050"
+    },
 
-<p>
-Shop smart, shop stylish.
-Explore fashion, electronics, beauty & home products.
-</p>
+    {
+      name: "Electronics",
+      image: "https://images.unsplash.com/photo-1498049794561-7780e7231661"
+    },
 
+    {
+      name: "Beauty",
+      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348"
+    },
 
-<Link to="/products">
+    {
+      name: "Home",
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6"
+    }
 
-<button className="primary-btn">
-Shop Now
-</button>
+  ];
 
-</Link>
 
+  return (
 
-</div>
+    <div className="home">
 
 
-</section>
+      <Navbar />
 
 
+      {/* ================= HERO ================= */}
 
 
+      <section className="hero">
 
 
-<section className="category-section">
+        <div className="hero-text">
 
 
-<h2>
-Shop By Category
-</h2>
+          <h1>
+            Welcome to ShopKart
+          </h1>
 
 
+          <p>
+            Shop smart, shop stylish.
+            Explore fashion, electronics, beauty & home products.
+          </p>
 
-<div className="category-container">
 
+          <Link to="/products">
 
-{
-categories.map((item,index)=>(
+            <button className="primary-btn">
+              Shop Now
+            </button>
 
-<div 
-className="category-card"
-key={index}
->
+          </Link>
 
 
-<img
-src={item.image}
-alt={item.name}
-/>
+        </div>
 
 
-<h3>
-{item.name}
-</h3>
+      </section>
 
 
-</div>
 
-))
-}
+      {/* ================= CATEGORY ================= */}
 
 
-</div>
+      <section className="category-section">
 
 
-</section>
+        <h2>
+          Shop By Category
+        </h2>
 
 
+        <div className="category-container">
 
 
+          {
+            categories.map((item, index) => (
 
+              <div
+                className="category-card"
+                key={index}
+              >
 
-<section className="featured">
 
+                <img
+                  src={item.image}
+                  alt={item.name}
+                />
 
-<h2>
-Featured Products
-</h2>
 
+                <h3>
+                  {item.name}
+                </h3>
 
 
-<div className="featured-slider">
+              </div>
 
+            ))
+          }
 
-<button 
-className="arrow-btn"
-onClick={prevProducts}
->
-◀
-</button>
 
+        </div>
 
 
-<div className="featured-container">
+      </section>
 
 
-{
-products
-.slice(startIndex,startIndex+4)
-.map((product)=>(
 
-<ProductCard
+      {/* ================= FEATURED PRODUCTS ================= */}
 
-key={product.id}
 
-product={product}
+      <section className="featured">
 
-/>
 
-))
-}
+        <h2>
+          Featured Products
+        </h2>
 
 
-</div>
+        {/* DESKTOP */}
 
 
+        <div className="featured-slider desktop-featured">
 
-<button 
-className="arrow-btn"
-onClick={nextProducts}
->
-▶
-</button>
 
+          <button
+            className="arrow-btn"
+            onClick={prevProducts}
+          >
+            ◀
+          </button>
 
-</div>
 
+          <div className="featured-container">
 
-</section>
 
+            {
+              products
+                .slice(startIndex, startIndex + 4)
+                .map((product) => (
 
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                  />
 
+                ))
+            }
 
 
+          </div>
 
 
-<section className="offer-banner">
+          <button
+            className="arrow-btn"
+            onClick={nextProducts}
+          >
+            ▶
+          </button>
 
 
-<h2>
-Special Offers
-</h2>
+        </div>
 
 
-<p>
-Get amazing discounts on latest products.
-</p>
 
+        {/* MOBILE */}
 
-</section>
 
+        <div className="mobile-featured">
 
 
+          <button
+            className="mobile-arrow"
+            onClick={prevMobileProduct}
+          >
+            ◀
+          </button>
 
-</div>
 
-)
+          <div className="mobile-product">
 
-}
+
+            {
+              products.length > 0 && (
+
+                <ProductCard
+                  product={products[startIndex]}
+                />
+
+              )
+            }
+
+
+          </div>
+
+
+          <button
+            className="mobile-arrow"
+            onClick={nextMobileProduct}
+          >
+            ▶
+          </button>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      {/* ================= OFFER ================= */}
+
+
+      <section className="offer-banner">
+
+
+        <h2>
+          Special Offers
+        </h2>
+
+
+        <p>
+          Get amazing discounts on latest products.
+        </p>
+
+
+      </section>
+
+
+    </div>
+
+  );
+
+};
 
 
 export default Home;
